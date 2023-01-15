@@ -5,6 +5,9 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { FeedModule } from './feed/feed.module';
 import { UsuarioModule } from './usuario/usuario.module';
+import { EjemplarModule } from './ejemplar/ejemplar.module';
+import { EntrenadorModule } from './entrenador/entrenador.module';
+import { JineteModule } from './jinete/jinete.module';
 
 
 @Module({
@@ -21,7 +24,10 @@ import { UsuarioModule } from './usuario/usuario.module';
       // synchronize: true,
     }),
     FeedModule,
-    UsuarioModule
+    UsuarioModule,
+    EjemplarModule,
+    EntrenadorModule,
+    JineteModule
   ],
   controllers: [AppController],
   providers: [AppService],
