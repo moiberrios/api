@@ -1,30 +1,18 @@
-import { Injectable } from '@nestjs/common';
-import { InjectRepository } from '@nestjs/typeorm';
-import { from, Observable } from 'rxjs';
-import { Repository, UpdateResult, DeleteResult } from 'typeorm';
-import { UsuarioPostEntity } from '../models/post.entity';
-import { UsuarioPost } from '../models/post.interface';
+import { Injectable } from "@nestjs/common";
+import { InjectRepository } from "@nestjs/typeorm";
+import { BaseService } from "src/commons/service.commons";
+import { Repository } from "typeorm";
+import { Usuario } from "../entities/usuario.entity";
 
 @Injectable()
-export class UsuarioService{ 
-    constructor(
-        @InjectRepository(UsuarioPostEntity)
-        private readonly usuarioPostRepository: Repository<UsuarioPostEntity>,
-    ) {}
+export class UsuarioService extends BaseService<Usuario> {
 
-    createPost(usuarioPost: UsuarioPost): Observable<UsuarioPost> {
-        return from(this.usuarioPostRepository.save(usuarioPost));
+    constructor(@InjectRepository(Usuario) private usuarioRepo : Repository<Usuario>) {
+        super();
     }
 
-    findAllPosts(): Observable<UsuarioPost[]>{
-        return from(this.usuarioPostRepository.find());
+    getRepository(): Repository<Usuario> {
+        return this.usuarioRepo;
     }
 
-    updatePost(id: number, usuarioPost: UsuarioPost): Observable<UpdateResult> {
-        return from (this.usuarioPostRepository.update(id,usuarioPost));
-    }
-
-    deletePost(id:number): Observable<DeleteResult>{
-        return from(this.usuarioPostRepository.delete(id));
-    }
 }
