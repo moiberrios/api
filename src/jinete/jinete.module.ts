@@ -10,5 +10,4 @@ import { JineteService } from './services/jinete.service';
     controllers : [JineteController]
 })
 export class JineteModule {
-
 }
